@@ -1,4 +1,6 @@
-const Food = require('../models/Food'); // Ensure the Food model is properly required
+const Food = require('../models/Food');
+const dotenv = require('dotenv');
+dotenv.config(); // Ensure the Food model is properly required
 
 exports.getFoodItems = async (req, res) => {
   try {
@@ -19,7 +21,7 @@ exports.addFood = async (req, res) => {
         return res.status(400).json({ message: 'Image is required' });
       }
   
-      const imagePath = `http://localhost:5000/uploads/${req.file.filename}`;
+      const imagePath = `${process.env.MONGO_URI}/uploads/${req.file.filename}`;
   
       const newFood = new Food({
         name,
